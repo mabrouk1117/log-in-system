@@ -63,6 +63,8 @@ int main()
             main();
             cout << "\n";
         }
+        //for (int i=0 ; i<data.size();i++ ) cout<<data[i].id<<" "<<data[i].pasword<<" "<<data[i].Email<<" "<<data[i].Phone<<" "<<endl;
+
 put_data();
 }
 return 0;

@@ -1,3 +1,4 @@
+#include <conio.h>
 #include "log_in_system.h"
 
 using namespace std;
@@ -96,14 +97,57 @@ bool valid_UserName(string& username)
 
 string PassWord()
 {
-string pass;
+string pass="",pass2="";
+char c;
+
 cout<<"\nPlease Enter a Strong Password\nA strong password has at least eight characters using One or more of each of the following:\n"
-<<"lower-case letters,upper-case letters,numbers,punctuation mark"
+<<"lower-case letters,upper-case letters,numbers, special symbols"
 <<"\n\nHINT: Lookalike characters protect your password against glimpses. Examples:\n"
 << "O as in Oscar and the number 0\nLower-case l and upper-case I"<<endl;
 
-cin>>pass;
-return pass;
+// loop condition: get a character, while it isn't a newline (end of password), then...
+while ((c=_getch()) != 13)
+{
+
+// put it onto the back of the password
+// output a '*' character
+    if ( c =='\b')
+    {
+        pass.pop_back();
+        putch('\b');
+        putch(' ');
+        putch('\b');
+    }
+    else{
+
+    pass.push_back(c);
+    _putch('*');
+    }
+}
+
+cout<<"confirm password :  ";
+while ((c=_getch()) != 13)
+{
+
+// put it onto the back of the password
+// output a '*' character
+    if ( c =='\b')
+    {
+        pass2.pop_back();
+        putch('\b');
+        putch(' ');
+        putch('\b');
+    }
+    else{
+
+    pass2.push_back(c);
+    _putch('*');
+    }
+}
+if (pass == pass2) return pass;
+
+return PassWord();
+
 }
 
 void UserData()
@@ -201,42 +245,60 @@ void UserData()
 }
 
 int ctr=0;
-
 void login()
 {
+    char c;
     // vector<user>data;
    string tempId , tempPass;
-
+    int x=0;
 
     cout<<"\nPlease enter your username: ";
     cin>>tempId;
 
     for(int i =0 ; i<data.size();i++)
     {
+
         if(tempId==data[i].id)
         {
              cout<<"\nPlease enter your Password: ";
-             cin>>tempPass;
+            while ((c=_getch()) != 13)
+            {
+
+            // put it onto the back of the password
+            // output a '*' character
+                if ( c =='\b')
+                {
+                    tempPass.pop_back();
+                    putch('\b');
+                    putch(' ');
+                    putch('\b');
+                }
+                else{
+                tempPass.push_back(c);
+                _putch('*');
+                }
+            }
              if(tempPass==data[i].pasword)
                 {
-                    cout<<"Successful login , welcome "<< tempId<<endl;
+
+                    cout<<"\nSuccessful login , welcome "<< tempId<<endl;
                 }
                 else
                 {
-                    cout<<"Failed login. Try again!"<<endl;
+                    cout<<"\nFailed login. Try again!"<<endl;
                     ctr++;
                     if(ctr>=3)
                     {
-                        cout<<"you're not allowed to login"<<endl;
+                        cout<<"\nyou're not allowed to login"<<endl;
 
                     }
                     else
                         login();
                 }
-
         }
-    }
 
+
+    }
 
 }
 
