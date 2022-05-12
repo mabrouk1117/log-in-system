@@ -1,5 +1,5 @@
 //log_in_system.h
-
+//
 #pragma once
 #include <iostream>
 #include <string>
@@ -53,5 +53,6 @@ void UserData();
 
 void login();
 
+void change_password();
 
 

@@ -1,11 +1,14 @@
 //Main.cpp
-
+//
 #include <bits/stdc++.h>
 #include <vector>
 using namespace std;
 
 #include "functions.cpp"
 
+
+
+using namespace std;
 
 
 
@@ -17,7 +20,7 @@ int main()
     {
         get_data();
 
-        cout<<"--------------------------------++++-----------------------------";
+        cout<<"\n--------------------------------++++-----------------------------";
         cout<<endl;
         cout <<"\nchoose the operation you want"<<endl<<"\n1.Register\n2.Login\n3.Change Password\n4.Exit\n"<<endl;
         cout<<"--------------------------------++++-----------------------------\n";
@@ -51,22 +54,22 @@ int main()
             }
             if (choice == 3)
             {
-
+                change_password();
             }
 
 
         }
-        //gets the user back to choose the operation if he enters a wrong input
+            //gets the user back to choose the operation if he enters a wrong input
         else
         {
             cout << "Sorry, your input is invalid. Please try again ! " << endl;
             main();
             cout << "\n";
         }
-        //for (int i=0 ; i<data.size();i++ ) cout<<data[i].id<<" "<<data[i].pasword<<" "<<data[i].Email<<" "<<data[i].Phone<<" "<<endl;
 
-put_data();
-}
-return 0;
+
+        put_data();
+    }
+    return 0;
 }
 
