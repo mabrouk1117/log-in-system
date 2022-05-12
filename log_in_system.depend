@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1652357895 source:d:\problem solving\log-in-system-main\log-in-system\main.cpp
+	<bits/stdc++.h>
+	"functions.cpp"
+
+1652297203 d:\problem solving\log-in-system-main\log-in-system\functions.cpp
+	<iostream>
+	<string>
+	<algorithm>
+	<fstream>
+	<sstream>
+	<vector>
+	"log_in_system.h"
+
+1652297200 d:\problem solving\log-in-system-main\log-in-system\log_in_system.h
+
