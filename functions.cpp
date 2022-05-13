@@ -56,7 +56,7 @@ void get_data()
         line << text;
         line>>data[i];
         line.str("");
-        line.clear();
+        //line.clear();
 
     }
     my_file.close();
@@ -244,7 +244,6 @@ void UserData()
 
 }
 
-int ctr=0;
 void login()
 {
     char c;
@@ -302,4 +301,62 @@ void login()
 
 }
 
+void change_password()
+{
 
+
+
+    char c;
+    // vector<user>data;
+    string tempId , tempPass;
+    int x=0;
+
+    cout<<"\nPlease enter your username: ";
+    cin>>tempId;
+
+    for(int i =0 ; i<data.size();i++)
+    {
+
+        if(tempId==data[i].id)
+        {
+            cout<<"\nPlease enter your OLd Password: ";
+            while ((c=_getch()) != 13)
+            {
+
+                // put it onto the back of the password
+                // output a '' character
+                if ( c =='\b')
+                {
+                    tempPass.pop_back();
+                    putch('\b');
+                    putch(' ');
+                    putch('\b');
+                }
+                else{
+                    tempPass.push_back(c);
+                    _putch('*');
+                }
+            }
+            if(tempPass==data[i].pasword)
+            {
+
+                data[i].pasword=PassWord();
+            }
+            else
+            {
+                cout<<"\nYour old password is wrong"<<endl;
+                ctr++;
+                if(ctr>=3)
+                {
+                    cout<<"\nyou're not allowed to login"<<endl;
+
+                }
+                else
+                   change_password();
+            }
+        }
+
+
+    }
+
+}

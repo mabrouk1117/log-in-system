@@ -12,7 +12,7 @@
 
 using namespace std;
 
-
+int ctr=0;
 fstream my_file;
 
 string file_name = "users.txt" ;
