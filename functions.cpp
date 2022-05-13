@@ -5,9 +5,12 @@ using namespace std;
 
 vector<user>data;
 
+
+
+
 istream &operator>> (stringstream &in, user& x  )
 {
-        in>>x.id>>x.pasword>>x.Email>>x.Phone;
+    in>>x.id>>x.pasword>>x.Email>>x.Phone;
 
 }
 
@@ -76,6 +79,52 @@ void put_data()
 
 }
 
+bool strongPass(string pass){
+    int ctr=0;
+    if(pass.size() <8  || pass.size() >30 ) return 0;
+    for (int i=0 ; i < pass.size() ;i++){
+        if ( islower(pass[i]))
+            ctr++;
+        else if ( isupper(pass[i]))
+            ctr+=2;
+        else if (isdigit(pass[i]))
+            ctr+=3;
+        else
+            ctr+=4;
+    }
+    if ( ctr==pass.size() || ctr==2*pass.size() || ctr==3*pass.size() || ctr==4*pass.size() )
+        return 0;
+    else return 1;
+
+}
+
+string coverPassword(){
+    char c;
+    string pass;
+    while ((c=_getch()) != 13)
+    {
+
+// put it onto the back of the password
+// output a '*' character
+        if ( c =='\b')
+        {
+            pass.pop_back();
+            putch('\b');
+            putch(' ');
+            putch('\b');
+        }
+        else{
+
+            pass.push_back(c);
+            _putch('*');
+        }
+    }
+    return pass;
+
+
+
+}
+
 bool valid_phone(string& phone)
 {
     regex check("01([0]|[1]|[2]|[5])([0-9]{8})");
@@ -97,56 +146,25 @@ bool valid_UserName(string& username)
 
 string PassWord()
 {
-string pass="",pass2="";
-char c;
+    string pass="",pass2="";
+    char c;
 
-cout<<"\nPlease Enter a Strong Password\nA strong password has at least eight characters using One or more of each of the following:\n"
-<<"lower-case letters,upper-case letters,numbers, special symbols"
-<<"\n\nHINT: Lookalike characters protect your password against glimpses. Examples:\n"
-<< "O as in Oscar and the number 0\nLower-case l and upper-case I"<<endl;
+    cout<<"\nPlease Enter a Strong Password\nA strong password has at least eight characters and max 30 characters using two or more of each of the following:\n"
+        <<"lower-case letters,upper-case letters,numbers, special symbols"
+        <<"\n\nHINT: Lookalike characters protect your password against glimpses. Examples:\n"
+        << "O as in Oscar and the number 0\nLower-case l and upper-case I"<<endl<<"enter password :  ";
 
-// loop condition: get a character, while it isn't a newline (end of password), then...
-while ((c=_getch()) != 13)
-{
-
-// put it onto the back of the password
-// output a '*' character
-    if ( c =='\b')
-    {
-        pass.pop_back();
-        putch('\b');
-        putch(' ');
-        putch('\b');
+    while(1){
+        pass=coverPassword();
+        if (strongPass(pass)==1)
+            break;
+        cout<<"\nyou entered a weak password\n\n";
     }
-    else{
+    cout<<"\nconfirm password :  ";
+    pass2 = coverPassword();
+    if (pass == pass2) return pass;
 
-    pass.push_back(c);
-    _putch('*');
-    }
-}
-
-cout<<"confirm password :  ";
-while ((c=_getch()) != 13)
-{
-
-// put it onto the back of the password
-// output a '*' character
-    if ( c =='\b')
-    {
-        pass2.pop_back();
-        putch('\b');
-        putch(' ');
-        putch('\b');
-    }
-    else{
-
-    pass2.push_back(c);
-    _putch('*');
-    }
-}
-if (pass == pass2) return pass;
-
-return PassWord();
+    return PassWord();
 
 }
 
@@ -158,80 +176,81 @@ void UserData()
     data.push_back(user());
 
 
- //Taking user name
+    //Taking user name
     while(1)
     {
-    x=0;
-    cout<<"\nEnter Username: ";
-    cin>>temp;
-    for(int i =0 ; i<data.size();i++)
-    {
-        if(temp==data[i].id)
+        x=0;
+        cout<<"\nTo have a valid username you can only use litters (upper/lower case) and ( _ )";
+        cout<<"\nEnter Username: ";
+        cin>>temp;
+        for(int i =0 ; i<data.size();i++)
         {
-            cout<<"this username is already taken";
+            if(temp==data[i].id)
+            {
+                cout<<"\nOps!! this username is already taken,try a new one"<<endl;
 
-           x=1;
-           break;
+                x=1;
+                break;
+            }
+
         }
+        if (x==1)
+            continue;
 
-    }
-    if (x==1)
-        continue;
+        if(valid_UserName(temp)==0)
+        {
+            cout<<"\nthis user is in invalid form";
 
-    if(valid_UserName(temp)==0)
-    {
-       cout<<"this user is in invalid form";
-
-       continue;
-    }
-    break;
+            continue;
+        }
+        break;
     }
 
     data[data.size()-1].id=temp;
 
 
 
-  //Taking user's Email
-     while(1)
+    //Taking user's Email
+    while(1)
     {
 
-    x=0;
-    cout<<"\nEnter your E-Mail: ";
-    cin>>temp;
-    for(int i =0 ; i<data.size();i++)
-    {
-        if(temp==data[i].Email)
+        x=0;
+        cout<<"\nEnter your E-Mail: ";
+        cin>>temp;
+        for(int i =0 ; i<data.size();i++)
         {
-            cout<<"this E-Mail is already used";
+            if(temp==data[i].Email)
+            {
+                cout<<"\nThis E-Mail address is already used";
 
-             x=1;
-            break;
+                x=1;
+                break;
+            }
         }
-    }
-    if (x==1)
-        continue;
+        if (x==1)
+            continue;
         if(valid_email(temp)==0)
         {
-            cout<<"this Email is invalid";
+            cout<<"\nthis Email is in invalid form";
             continue;
         }
-    break;
+        break;
     }
     data[data.size()-1].Email=temp;
 
 
-   //Taking user's phone number
+    //Taking user's phone number
     while(1)
     {
         cout<<endl<<"enter phone: ";
         cin>>temp;
 
-       if(valid_phone(temp)==0)
+        if(valid_phone(temp)==0)
         {
             cout<<"this number is incorrect";
             continue;
         }
-       break;
+        break;
     }
 
     data[data.size()-1].Phone=temp;
@@ -239,6 +258,7 @@ void UserData()
 
     //PASSWORD
     temp=PassWord();
+    for (int i=0 ; i<temp.size();i++ ) temp[i]+=(2*i);
     data[data.size()-1].pasword=temp;
 
 
@@ -248,7 +268,7 @@ void login()
 {
     char c;
     // vector<user>data;
-   string tempId , tempPass;
+    string tempId , tempPass;
     int x=0;
 
     cout<<"\nPlease enter your username: ";
@@ -259,41 +279,27 @@ void login()
 
         if(tempId==data[i].id)
         {
-             cout<<"\nPlease enter your Password: ";
-            while ((c=_getch()) != 13)
+            cout<<"\nPlease enter your Password: ";
+            tempPass = coverPassword() ;
+            for (int i=0 ; i<tempPass.size();i++ ) tempPass[i]+=(2*i);
+
+            if(tempPass==data[i].pasword)
             {
 
-            // put it onto the back of the password
-            // output a '*' character
-                if ( c =='\b')
-                {
-                    tempPass.pop_back();
-                    putch('\b');
-                    putch(' ');
-                    putch('\b');
-                }
-                else{
-                tempPass.push_back(c);
-                _putch('*');
-                }
+                cout<<"\nSuccessful login , welcome "<< tempId<<endl;
             }
-             if(tempPass==data[i].pasword)
+            else
+            {
+                cout<<"\nFailed login. Try again!"<<endl;
+                ctr++;
+                if(ctr>=3)
                 {
+                    cout<<"\nyou're not allowed to login"<<endl;
 
-                    cout<<"\nSuccessful login , welcome "<< tempId<<endl;
                 }
                 else
-                {
-                    cout<<"\nFailed login. Try again!"<<endl;
-                    ctr++;
-                    if(ctr>=3)
-                    {
-                        cout<<"\nyou're not allowed to login"<<endl;
-
-                    }
-                    else
-                        login();
-                }
+                    login();
+            }
         }
 
 
@@ -303,9 +309,6 @@ void login()
 
 void change_password()
 {
-
-
-
     char c;
     // vector<user>data;
     string tempId , tempPass;
@@ -320,23 +323,9 @@ void change_password()
         if(tempId==data[i].id)
         {
             cout<<"\nPlease enter your OLd Password: ";
-            while ((c=_getch()) != 13)
-            {
+           tempPass = coverPassword();
+            for (int i=0 ; i<tempPass.size();i++ ) tempPass[i]+=(2*i);
 
-                // put it onto the back of the password
-                // output a '' character
-                if ( c =='\b')
-                {
-                    tempPass.pop_back();
-                    putch('\b');
-                    putch(' ');
-                    putch('\b');
-                }
-                else{
-                    tempPass.push_back(c);
-                    _putch('*');
-                }
-            }
             if(tempPass==data[i].pasword)
             {
 
@@ -352,11 +341,16 @@ void change_password()
 
                 }
                 else
-                   change_password();
+                    change_password();
             }
         }
 
 
     }
 
+
+
+
 }
+
+
