@@ -311,7 +311,7 @@ void change_password()
 {
     char c;
     // vector<user>data;
-    string tempId , tempPass;
+    string tempId , tempPass ,newPass;
     int x=0;
 
     cout<<"\nPlease enter your username: ";
@@ -323,13 +323,15 @@ void change_password()
         if(tempId==data[i].id)
         {
             cout<<"\nPlease enter your OLd Password: ";
-           tempPass = coverPassword();
-            for (int i=0 ; i<tempPass.size();i++ ) tempPass[i]+=(2*i);
+            tempPass = coverPassword();
+            for (int j=0 ; j<tempPass.size();j++ ) tempPass[j]+=(2*j);
 
             if(tempPass==data[i].pasword)
             {
 
-                data[i].pasword=PassWord();
+   newPass = PassWord();
+    for (int j=0 ; j<newPass.size();j++ ) newPass[j]+=(2*j);
+   data[i].pasword=newPass;
             }
             else
             {
@@ -352,5 +354,3 @@ void change_password()
 
 
 }
-
-
