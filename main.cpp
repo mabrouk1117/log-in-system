@@ -1,9 +1,16 @@
-//Main.cpp
-//
+// FCAI - Structured Programming - 2022 - Assignment 4
+//Program Name : LOGIN system
+// Program Description : saves user's data as login systems using a file of txt to save those data
+// Author1 :  Mohamed Ashraf Fahim         ID:20210329       Group: A
+// Author2 :  Momen Mostafa Mabrouk        ID:20210416       Group: A
+// Author3 :  Mariam Esmat Ahmed           ID:20211091       Group: A
+// ver4 of Date : 14th of May 2022
+//section 9,10
+
+
 #include <bits/stdc++.h>
 #include <vector>
 #include "functions.cpp"
-
 using namespace std;
 
 
@@ -60,7 +67,6 @@ int main()
             main();
             cout << "\n";
         }
-        //for (int i=0 ; i<data.size();i++ ) cout<<data[i].id<<" "<<data[i].pasword<<" "<<data[i].Email<<" "<<data[i].Phone<<" "<<endl;
 
 
         put_data();
