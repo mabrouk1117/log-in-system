@@ -31,8 +31,8 @@ int main()
         cout << "\n";
         check_operation(chosen_opperation);
         int choice = stoi(chosen_opperation);
-        cin.ignore();
-        //for (int i=0 ; i<data.size();i++ ) cout<<data[i].id<<" "<<data[i].pasword<<" "<<data[i].Email<<" "<<data[i].Phone<<" "<<endl;
+        cin.sync();
+        cin.clear() ;          
         if (choice == 4)
         {
             cout << "Thank you for using our program :)\n";
